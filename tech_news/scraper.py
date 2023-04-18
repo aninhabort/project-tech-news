@@ -1,7 +1,8 @@
-from bs4 import BeautifulSoup
 import requests
 import time
 import re
+from bs4 import BeautifulSoup
+from tech_news.database import create_news
 
 
 # Requisito 1
@@ -73,5 +74,23 @@ def scrape_news(html_content):
 
 
 # Requisito 5
-def get_tech_news(amount):
-    """Seu código deve vir aqui"""
+def get_tech_news(amount: int):
+    base_url = 'https://blog.betrybe.com'
+    url_list = []
+    news = []
+
+    page_content = fetch(base_url)
+    url_list.extend(scrape_updates(page_content))
+
+    while len(url_list) < amount:
+        next_page = scrape_next_page_link(page_content)
+        page_content = fetch(next_page)
+        url_list.extend(scrape_updates(page_content))
+
+    for url in url_list[:amount]:
+        page_url = fetch(url)
+        fetch_news = scrape_news(page_url)
+        news.append(fetch_news)
+
+    create_news(news)
+    return news
