@@ -1,4 +1,4 @@
-# Projeto Job Insights
+# Projeto Tech News
 
 Foi aplicado o conteúdo sobre Python, onde foi feito um projeto que tem como principal objetivo criar um banco de dados de notícias sobre tecnologia e realizar algumas consultas nas notícias registradas.
 Essas notícias foram obtidas através da raspagem do <a href="https://blog.betrybe.com/">Blog da Trybe</a>.
